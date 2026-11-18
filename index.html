@@ -1,10 +1,28 @@
 <!doctype html>
-<html lang="en">
+<html lang="es-AR">
   <head>
     <meta charset="UTF-8" />
+    <meta name="color-scheme" content="light dark" />
+    <script>
+      try {
+        var savedTheme = localStorage.getItem("gekko-theme");
+        var metaScheme = document.querySelector('meta[name="color-scheme"]');
+        var isDark = savedTheme
+          ? savedTheme === "dark"
+          : window.matchMedia("(prefers-color-scheme: dark)").matches;
+        if (metaScheme) {
+          metaScheme.content = savedTheme || "light dark";
+        }
+        if (isDark) {
+          document.documentElement.setAttribute("data-theme", "dark");
+        } else {
+          document.documentElement.removeAttribute("data-theme");
+        }
+      } catch (e) {}
+    </script>
     <link rel="icon" type="image/svg+xml" href="/gekko-web/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>gekko-web</title>
+    <title>Gekko Club Social • Asociación Civil REPROCANN</title>
     <!-- Restaurador de rutas SPA para GitHub Pages -->
     <script type="text/javascript">
       (function(l) {
@@ -18,8 +36,8 @@
         }
       }(window.location));
     </script>
-    <script type="module" crossorigin src="/gekko-web/assets/index-CBTRoolR.js"></script>
-    <link rel="stylesheet" crossorigin href="/gekko-web/assets/index-1HzcHBXw.css">
+    <script type="module" crossorigin src="/gekko-web/assets/index-AshNtPri.js"></script>
+    <link rel="stylesheet" crossorigin href="/gekko-web/assets/index-DzQzPODp.css">
   </head>
   <body>
     <div id="root"></div>
