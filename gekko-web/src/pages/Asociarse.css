@@ -2,27 +2,27 @@
 
 /* Variables locales específicas del formulario en esta página */
 :root {
-  --form-bg: #FFFFFF;
-  --form-border: rgba(26, 56, 43, 0.18);
+  --form-bg: #F3EFE6;
+  --form-border: rgba(26, 56, 43, 0.16);
   --form-ink: #1A382B;
   --form-ink-muted: rgba(26, 56, 43, 0.80);
-  --form-input-bg: #EBE8E0;
-  --form-input-border: rgba(26, 56, 43, 0.15);
+  --form-input-bg: #E6E1D6;
+  --form-input-border: rgba(26, 56, 43, 0.16);
   --form-input-placeholder: rgba(26, 56, 43, 0.50);
   --form-btn-bg: #1A382B;
-  --form-btn-ink: #F3F0E6;
+  --form-btn-ink: #F3EFE6;
 }
 
 [data-theme="dark"] {
   --form-bg: #13261E;
-  --form-border: rgba(248, 249, 246, 0.14);
+  --form-border: rgba(212, 163, 89, 0.28);
   --form-ink: #F8F9F6;
-  --form-ink-muted: rgba(248, 249, 246, 0.70);
+  --form-ink-muted: rgba(248, 249, 246, 0.72);
   --form-input-bg: #1A3328;
-  --form-input-border: rgba(248, 249, 246, 0.14);
+  --form-input-border: rgba(248, 249, 246, 0.16);
   --form-input-placeholder: rgba(248, 249, 246, 0.45);
-  --form-btn-bg: #F8F9F6;
-  --form-btn-ink: #1A382B;
+  --form-btn-bg: #D4A359;
+  --form-btn-ink: #07120D;
 }
 
 /* Main Split Layout */
@@ -31,20 +31,20 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 4rem 2rem;
+  padding: 2.5rem 0 2rem;
 }
 
 .admissions-container {
-  width: 100%;
-  max-width: 1280px;
+  width: calc(100% - 48px);
+  max-width: 1344px;
   margin: 0 auto;
 }
 
 .admissions-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 560px 1fr;
   gap: 5rem;
-  align-items: center;
+  align-items: start;
 }
 
 .admissions-copy {
@@ -56,13 +56,18 @@
 .admissions-eyebrow {
   display: inline-flex;
   align-items: center;
+  align-self: flex-start;
   gap: 8px;
+  padding: 7px 16px;
+  border-radius: 9999px;
+  background-color: var(--pill-bg);
+  border: 1px solid rgba(212, 163, 89, 0.40);
   margin-bottom: 1.5rem;
 }
 
 .eyebrow-dot {
-  width: 8px;
-  height: 8px;
+  width: 6px;
+  height: 6px;
   border-radius: 50%;
   background-color: var(--accent);
   flex-shrink: 0;
@@ -70,31 +75,105 @@
 }
 
 .eyebrow-text {
-  font-size: 12px;
+  font-family: var(--font-geom);
+  font-size: 10px;
   font-weight: 700;
-  letter-spacing: 0.18em;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--accent);
+  color: var(--pill-ink);
 }
 
 .admissions-headline {
   font-family: var(--font-geom);
-  font-size: clamp(2.75rem, 4.5vw, 4.5rem);
+  font-size: clamp(2.5rem, 4vw, 3.6rem);
   font-weight: 700;
-  line-height: 1.05;
+  line-height: 1.08;
   letter-spacing: -0.03em;
   color: var(--ink);
-  margin-bottom: 2rem;
+  margin-bottom: 1.5rem;
+}
+
+.headline-accent {
+  color: var(--accent-ink);
 }
 
 .admissions-paragraph {
-  font-size: 1.125rem;
-  line-height: 1.7;
+  font-size: 1.05rem;
+  line-height: 1.65;
   color: var(--ink-muted);
-  max-width: 540px;
+  max-width: 530px;
+  margin-bottom: 2rem;
+}
+
+.admissions-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.step-card {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 18px 20px;
+  border-radius: 16px;
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+}
+
+.step-badge {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background-color: #1A382B;
+  color: var(--accent);
+  font-family: var(--font-geom);
+  font-size: 14px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+[data-theme="dark"] .step-badge {
+  background-color: #0B1913;
+  border: 1px solid rgba(212, 163, 89, 0.30);
+}
+
+.step-content h3 {
+  font-family: var(--font-geom);
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--ink);
+  margin-bottom: 4px;
+}
+
+.step-content p {
+  font-size: 12.5px;
+  line-height: 1.45;
+  color: var(--ink-muted);
+  margin: 0;
+}
+
+.form-header-pill {
+  padding: 6px 14px;
+  border-radius: 9999px;
+  background-color: var(--pill-bg);
+  border: 1px solid rgba(212, 163, 89, 0.40);
+  color: var(--pill-ink);
+  font-family: var(--font-geom);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
 }
 
 /* Tarjeta y Formulario */
+.admissions-form-section {
+  scroll-margin-top: 92px;
+}
+
 .form-card {
   background-color: var(--form-bg);
   border: 1px solid var(--form-border);
@@ -199,15 +278,58 @@
 }
 
 .form-textarea {
+  field-sizing: content;
+  height: auto;
+  width: 100%;
+  min-block-size: 3lh;
+  max-block-size: 8lh;
   min-height: 95px;
   resize: vertical;
   line-height: 1.5;
 }
 
+.form-error-msg {
+  display: none;
+  color: #b91c1c;
+  font-size: 0.78rem;
+  font-weight: 600;
+  margin-top: 0.35rem;
+}
+
+[data-theme="dark"] .form-error-msg {
+  color: #f87171;
+}
+
+.form-input:user-invalid,
+.form-select:user-invalid,
+.form-textarea:user-invalid {
+  border-color: #d93025;
+}
+
+.form-input:user-invalid + .form-error-msg,
+.form-textarea:user-invalid + .form-error-msg {
+  display: block;
+}
+
+.form-input:user-valid,
+.form-select:user-valid,
+.form-textarea:user-valid {
+  border-color: rgba(16, 185, 129, 0.55);
+}
+
 .form-footer {
   display: flex;
-  justify-content: flex-end;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
   margin-top: 0.5rem;
+}
+
+.form-privacy-note {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--form-ink-muted);
 }
 
 .form-submit-btn {

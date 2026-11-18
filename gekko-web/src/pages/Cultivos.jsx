@@ -1,11 +1,14 @@
 // src/pages/Cultivos.jsx
 import React, { useState } from 'react';
 import './Cultivos.css';
+import foto1 from '../assets/1.jpeg';
+import foto2 from '../assets/2.jpeg';
+import cogolloLight from '../assets/cogollo_light.jpeg';
 
 const roomsData = [
   {
     id: 'sala-1',
-    tag: 'SALA 01',
+    tag: '● SALA 1 • VEGETACIÓN',
     name: 'Vegetación & Madres',
     desc: 'Espacio optimizado para preservar genéticas madre selectas y promover un desarrollo radicular y vegetativo vigoroso antes de la etapa floral.',
     specs: [
@@ -15,25 +18,25 @@ const roomsData = [
     ],
     slides: [
       {
-        src: 'https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?q=80&w=1200&auto=format&fit=crop',
+        src: foto2,
         alt: 'Foto Sala 1 - Visión General',
-        caption: 'Vista general del dosel botánico en etapa vegetativa.'
+        caption: 'Vista general del dosel botánico en etapa vegetativa y nutrición controlada.'
       },
       {
-        src: 'https://images.unsplash.com/photo-1530595467537-0b5996c41f2d?q=80&w=1200&auto=format&fit=crop',
+        src: foto1,
         alt: 'Foto Sala 1 - Sistema de Riego',
         caption: 'Detalle de nutrición orgánica y control de humedad relativa.'
       },
       {
-        src: 'https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?q=80&w=1200&auto=format&fit=crop',
-        alt: 'Foto Sala 1 - Iluminación LED',
-        caption: 'Paneles LED de alta eficiencia diseñados para desarrollo genético.'
+        src: cogolloLight,
+        alt: 'Foto Sala 1 - Desarrollo Genético',
+        caption: 'Estabilidad genética y selección fenotípica bajo espectro LED.'
       }
     ]
   },
   {
     id: 'sala-2',
-    tag: 'SALA 02',
+    tag: '● SALA 2 • FLORACIÓN',
     name: 'Floración High-Density',
     desc: 'Ambiente de floración intensiva con control de temperatura, flujo de aire unidireccional y máxima intensidad fotónica para la maduración óptima de tricomas.',
     specs: [
@@ -43,25 +46,25 @@ const roomsData = [
     ],
     slides: [
       {
-        src: 'https://images.unsplash.com/photo-1501004318641-b39e6451bec6?q=80&w=1200&auto=format&fit=crop',
+        src: foto1,
         alt: 'Foto Sala 2 - Floración',
-        caption: 'Estructura de floración avanzada en entorno controlado.'
+        caption: 'Estructura de floración avanzada en entorno controlado y maduración de resina.'
       },
       {
-        src: 'https://images.unsplash.com/photo-1464226184884-fa280b87c399?q=80&w=1200&auto=format&fit=crop',
+        src: foto2,
         alt: 'Foto Sala 2 - Macro de flores',
-        caption: 'Maduración de pistilos y densidad de resina botánica.'
+        caption: 'Maduración de pistilos y densidad de tricomas botánicos.'
       },
       {
-        src: 'https://images.unsplash.com/photo-1523348837708-15d4a09cfac2?q=80&w=1200&auto=format&fit=crop',
-        alt: 'Foto Sala 2 - Control de flujo de aire',
-        caption: 'Monitoreo térmico y renovación continua de aire.'
+        src: cogolloLight,
+        alt: 'Foto Sala 2 - Cosecha Selecta',
+        caption: 'Curado hermético y monitoreo térmico continuo.'
       }
     ]
   }
 ];
 
-function RoomCarousel({ slides }) {
+function RoomCarousel({ slides, roomName, isFirstRoom }) {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const prevSlide = () => {
@@ -73,44 +76,68 @@ function RoomCarousel({ slides }) {
   };
 
   return (
-    <div className="carousel-wrapper">
+    <section
+      className="carousel-wrapper"
+      aria-roledescription="carousel"
+      aria-label={`Galería de ${roomName}`}
+    >
       <div
         className="carousel-track"
         style={{ transform: `translateX(-${currentIndex * 100}%)` }}
       >
-        {slides.map((slide, index) => (
-          <div className="carousel-slide" key={index}>
-            <img src={slide.src} alt={slide.alt} />
-            <div className="slide-caption">{slide.caption}</div>
-          </div>
-        ))}
+        {slides.map((slide, index) => {
+          const isInitialLcp = isFirstRoom && index === 0;
+          return (
+            <div
+              className="carousel-slide"
+              key={index}
+              role="group"
+              aria-roledescription="slide"
+              aria-label={`${index + 1} de ${slides.length}`}
+            >
+              <img
+                src={slide.src}
+                alt={slide.alt}
+                fetchPriority={isInitialLcp ? 'high' : index > 0 ? 'low' : undefined}
+                loading={isInitialLcp ? undefined : 'lazy'}
+                decoding="async"
+              />
+              <div className="slide-caption">{slide.caption}</div>
+            </div>
+          );
+        })}
       </div>
 
       <button
+        type="button"
         className="carousel-btn prev"
         onClick={prevSlide}
-        aria-label="Anterior"
+        aria-label="Imagen anterior"
       >
         ❮
       </button>
       <button
+        type="button"
         className="carousel-btn next"
         onClick={nextSlide}
-        aria-label="Siguiente"
+        aria-label="Siguiente imagen"
       >
         ❯
       </button>
 
-      <div className="carousel-dots">
-        {slides.map((_, index) => (
-          <div
+      <div className="carousel-dots" role="group" aria-label="Elegir imagen">
+        {slides.map((slide, index) => (
+          <button
+            type="button"
             key={index}
             className={`dot ${index === currentIndex ? 'active' : ''}`}
+            aria-label={`Ir a imagen ${index + 1}: ${slide.alt}`}
+            aria-current={index === currentIndex ? 'true' : undefined}
             onClick={() => setCurrentIndex(index)}
           />
         ))}
       </div>
-    </div>
+    </section>
   );
 }
 
@@ -128,7 +155,7 @@ export default function Cultivos() {
         </p>
       </section>
 
-      {roomsData.map((room) => (
+      {roomsData.map((room, roomIdx) => (
         <section className="room-section" id={room.id} key={room.id}>
           <div className="room-header">
             <div className="room-title-group">
@@ -147,7 +174,11 @@ export default function Cultivos() {
             </div>
           </div>
 
-          <RoomCarousel slides={room.slides} />
+          <RoomCarousel
+            slides={room.slides}
+            roomName={room.name}
+            isFirstRoom={roomIdx === 0}
+          />
         </section>
       ))}
     </main>
